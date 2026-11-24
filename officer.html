@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgriPulse – Officer Dashboard</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <header class="topbar officer-topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-icon">🌾</span>
+        <span class="logo-text">AgriPulse</span>
+        <span class="role-tag">Officer Panel</span>
+      </div>
+      <div class="topbar-right">
+        <div class="user-chip">
+          <span class="user-chip-icon">🏛️</span>
+          <span>Agricultural Officer</span>
+        </div>
+        <button class="btn btn-logout" id="logout-btn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="officer-wrapper">
+
+    <!-- Stats Row -->
+    <section class="stats-row">
+      <div class="stat-card pending-stat">
+        <div class="stat-left">
+          <span class="stat-num" id="stat-pending">0</span>
+          <span class="stat-lbl">Pending</span>
+        </div>
+        <span class="stat-ico">⏳</span>
+      </div>
+      <div class="stat-card progress-stat">
+        <div class="stat-left">
+          <span class="stat-num" id="stat-inprogress">0</span>
+          <span class="stat-lbl">In Progress</span>
+        </div>
+        <span class="stat-ico">🔄</span>
+      </div>
+      <div class="stat-card resolved-stat">
+        <div class="stat-left">
+          <span class="stat-num" id="stat-resolved">0</span>
+          <span class="stat-lbl">Resolved</span>
+        </div>
+        <span class="stat-ico">✅</span>
+      </div>
+      <div class="stat-card total-stat">
+        <div class="stat-left">
+          <span class="stat-num" id="stat-total">0</span>
+          <span class="stat-lbl">Total Queries</span>
+        </div>
+        <span class="stat-ico">📊</span>
+      </div>
+    </section>
+
+    <!-- Query Management -->
+    <section class="card officer-card">
+      <div class="officer-card-header">
+        <div>
+          <h2>🗂️ Farmer Query Management</h2>
+          <p class="muted-text">Review, respond to, and update the status of submitted queries</p>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="refresh-btn">↺ Refresh</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-bar">
+        <div class="tab-bar">
+          <button class="tab active" data-filter="All">All</button>
+          <button class="tab" data-filter="Pending">⏳ Pending</button>
+          <button class="tab" data-filter="In Progress">🔄 In Progress</button>
+          <button class="tab" data-filter="Resolved">✅ Resolved</button>
+        </div>
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Search Farmer ID, name, subject…" />
+        </div>
+      </div>
+
+      <div id="officer-queries-list" class="queries-list">
+        <div class="empty-state">
+          <div class="empty-icon">📭</div>
+          <h3>No queries submitted yet</h3>
+          <p>Farmer queries will appear here once submitted.</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- .officer-wrapper -->
+
+  <!-- Reply Modal -->
+  <div id="reply-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h3>✍️ Respond to Query</h3>
+          <p class="muted-text" id="modal-query-id"></p>
+        </div>
+        <button class="modal-close" id="modal-close-btn" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-query-preview" id="modal-query-info"></div>
+
+        <div class="form-group">
+          <label for="officer-reply">Your Response <span class="req">*</span></label>
+          <textarea id="officer-reply" rows="5" placeholder="Type your expert response here…" maxlength="1500"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="status-update">Update Status <span class="req">*</span></label>
+          <div class="status-selector">
+            <label class="status-opt pending-opt">
+              <input type="radio" name="modal-status" value="Pending"/>
+              <span>⏳ Pending</span>
+            </label>
+            <label class="status-opt progress-opt">
+              <input type="radio" name="modal-status" value="In Progress"/>
+              <span>🔄 In Progress</span>
+            </label>
+            <label class="status-opt resolved-opt">
+              <input type="radio" name="modal-status" value="Resolved"/>
+              <span>✅ Resolved</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="reply-error" class="error-msg hidden"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-officer" id="submit-reply-btn">💾 Save Response</button>
+        <button class="btn btn-ghost"   id="cancel-reply-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <p>🌾 AgriPulse &copy; 2025 &mdash; Empowering Farmers with Digital Support</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/officer.js"></script>
+</body>
+</html>
